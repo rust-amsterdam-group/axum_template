@@ -1,7 +1,7 @@
 use std::net::SocketAddr;
 use std::sync::Arc;
 
-use axum::{AddExtensionLayer, Router, routing::get};
+use axum::{routing::get, AddExtensionLayer, Router};
 
 mod routes;
 
@@ -16,7 +16,7 @@ async fn main() {
 
     let address = match std::env::var("PORT") {
         Ok(port) => SocketAddr::from(([0, 0, 0, 0], port.parse::<u16>().unwrap())),
-        Err(_e) => SocketAddr::from(([127, 0, 0, 1], 8080))
+        Err(_e) => SocketAddr::from(([127, 0, 0, 1], 8080)),
     };
 
     axum::Server::bind(&address)
@@ -24,4 +24,3 @@ async fn main() {
         .await
         .unwrap();
 }
-
